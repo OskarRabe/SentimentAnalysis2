@@ -1,0 +1,14 @@
+ipykernel
+numpy
+pandas
+contractions
+fasttext
+nltk
+requests
+snowballstemmer
+textblob
+pyarrow
+scikit-learn
+matplotlib
+wordcloud
+cufflinks
