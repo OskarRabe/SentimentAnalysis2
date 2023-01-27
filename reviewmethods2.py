@@ -71,6 +71,8 @@ def clean(text):
     return text
 
     # https://monkeylearn.com/blog/text-cleaning/
+
+
 def clean2(text):
     text = text.lower()
     text = re.sub(r"(@\[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)|^rt|http.+?", "", text)
