@@ -118,15 +118,15 @@ def snowball_stemmer(text):
     return cleaned_text
 
 
-def get_top100games():
+def get_top100games(reviews_per_game):
     x = requests.get('https://steamspy.com/api.php?request=top100in2weeks')
     binary = x.content
     df1 = pd.DataFrame(json.loads(binary)).loc[['appid', 'name', 'positive', 'negative'], :].T
     df1.reset_index(drop=True, inplace=True)
     df1['neg_multiplier'] = df1.negative / (df1.negative + df1.positive)
     df1['neg_multiplier'] = df1.neg_multiplier.astype(float).round(2)
-    df1['negative_amount'] = df1.neg_multiplier * 1000
-    df1['positive_amount'] = (1 - df1.neg_multiplier) * 1000
+    df1['negative_amount'] = df1.neg_multiplier * reviews_per_game
+    df1['positive_amount'] = (1 - df1.neg_multiplier) * reviews_per_game
     df1['negative_amount'] = df1.negative_amount.astype(int)
     df1['positive_amount'] = df1.positive_amount.astype(int)
     df1.to_csv('output_top100games.csv', index=False)
